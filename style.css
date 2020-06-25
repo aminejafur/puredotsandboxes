@@ -1,0 +1,270 @@
+/*
+* Dots and Boxes game in pure html, css and javascript
+* 
+* Author : Amine jafur
+* 
+*/
+
+@import url('https://fonts.googleapis.com/css?family=Schoolbell&v1');
+
+*{
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  margin:0;
+}
+
+body{
+  font-family: 'Schoolbell';
+  font-size: 23px;
+  background-color: #FFF;
+  overflow-x: hidden;
+}
+
+.a-four{
+  width: 20cm;
+  min-height: 29.7cm;
+  margin: 1cm auto;
+  border: 1px #D3D3D3 solid;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.cover {
+  margin: unset;
+  z-index: 9;
+  background: transparent url('cover.png') no-repeat center center;
+  background-size:cover;
+  -webkit-transform: rotateY(0deg);
+          transform: rotateY(0deg);
+  position: absolute;
+  -webkit-transform-origin: 100% 0;
+      -ms-transform-origin: 100% 0;
+          transform-origin: 100% 0;
+  -webkit-box-shadow: inset 3px 0px 20px rgba(0, 0, 0, 0.2),
+    0px 0px 15px rgba(0, 0, 0, 0.1);
+          box-shadow: inset 3px 0px 20px rgba(0, 0, 0, 0.2),
+    0px 0px 15px rgba(0, 0, 0, 0.1);
+}
+
+.cover span{
+    width: 100%;
+    position: absolute;
+    text-align: center;
+    top: 15%;
+    color: #352d24;
+    font-size: 40px;
+    font-weight: bolder;
+    cursor: pointer;
+    margin: unset;
+    opacity: 0.8
+}
+
+.cover input{
+    display: block;
+    margin: 5px;
+    width: 15%;
+    text-align: center;
+    color: #352d24;
+    opacity: 0.4;
+}
+
+.danger{
+  border:solid 1px red;
+}
+
+.cover.flip {
+  -webkit-animation: FlipCover 3s forwards;
+          animation: FlipCover 3s forwards;
+}
+
+.cover.close {
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+  -webkit-animation: CloseCover 1s forwards;
+          animation: CloseCover 1s forwards;
+}
+
+.container
+{
+  background-image:
+      -o-repeating-linear-gradient(#53CAFF 0 1px, transparent 1px 100%);
+  background-image:
+      repeating-linear-gradient(#53CAFF 0 1px, transparent 1px 100%);
+  background-size: 8px 8px;
+}
+
+.score-board, .game
+{
+   display: inline-block;
+}
+
+.game
+{
+   width:75%;
+   /*vertical-align: top;*/
+}
+
+.score-board
+{
+/*   pointer-events: none;*/
+   position: absolute;
+   padding:8px;
+}
+
+.score-board span
+{
+  cursor: pointer;
+}
+
+.color-box {
+  display: inline-block;
+  width: 10px;
+  height:10px;
+ }
+
+.box {
+  margin: 50px auto;
+  width: 40px;
+  height:40px;
+  position:relative;
+  display: none;
+  overflow: hidden;
+ }
+
+ .show{
+  display: table-cell;
+ }
+ 
+ .no-pointer{
+  pointer-events: none;
+ }
+
+.top,.left,.bottom{
+  background:#594080;
+}
+
+.top{
+  position:absolute;
+  width:0%;
+  height:5%;
+  -webkit-animation: WidthAnimation 0.5s forwards;
+          animation: WidthAnimation 0.5s forwards;
+}
+
+.left{
+  position:absolute;
+  width:5%;
+  height:0%;
+  -webkit-animation: HeightAnimation 0.5s forwards;
+          animation: HeightAnimation 0.5s forwards; 
+}
+
+.bottom{
+  position:absolute;
+  bottom:0px;
+  width:0%;
+  height:5%;
+  -webkit-animation: WidthAnimation 0.5s forwards;
+          animation: WidthAnimation 0.5s forwards;
+}
+
+.left:hover,.top:hover,.bottom:hover{
+  cursor:pointer;
+}
+
+.box-end{
+  /*change this when you change the boxes width.*/
+  width:2px
+}
+
+.border-end{
+  width:100%
+}
+
+.new-line{
+  clear:both;
+}
+
+.new-line + .box > .left , .border-end{
+  background:red;
+}
+
+.disabled{
+  pointer-events: none
+}
+
+.check {
+    position: relative;
+}
+
+.check::before,
+.check::after {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 1px;
+    background-color: var(--color);
+    top:0px;
+    -webkit-animation: fromTopAnimation 0.3s forwards;
+            animation: fromTopAnimation 0.3s forwards;
+}
+
+.check::before {
+    -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+            transform: rotate(45deg);
+}
+
+.check::after {
+    -webkit-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+}
+
+.hide{
+  -webkit-animation: fadeInToNone 1.5s forwards;
+          animation: fadeInToNone 1.5s forwards;
+}
+
+/*animations*/
+@-webkit-keyframes fromTopAnimation {
+  100% {top:20px}
+}
+
+@-webkit-keyframes FlipCover {
+  100% {-webkit-transform: rotateY(180deg);transform: rotateY(180deg);background: #e9e6c4}
+}
+
+@-webkit-keyframes CloseCover {
+  0% {-webkit-transform: rotateY(180deg);transform: rotateY(180deg);background: #e9e6c4}
+  100% {-webkit-transform: rotateY(360deg);transform: rotateY(360deg);}
+}
+
+@-webkit-keyframes WidthAnimation {
+  100% {width: 100%}
+}
+
+@-webkit-keyframes HeightAnimation {
+  100% {height: 100%}
+}
+
+@-webkit-keyframes fadeInToNone {
+  100% {opacity: 0}
+}
+
+/*responsive*/
+@media (max-width: 480px) {
+
+.game{
+  width: 100%;
+  display: block;
+}
+
+.score-board, .game
+{
+  position:relative;
+}
+  
+}
